@@ -27,6 +27,7 @@ module HtmlPress
       @placeholders = []
 
       out = process_ie_conditional_comments out
+      out = process_google_conditional_comments out
       out = process_scripts out
       out = process_styles out
       out = process_html_comments out
@@ -61,6 +62,13 @@ module HtmlPress
         comment_compressed = Html.new.press(comment)
         m.gsub!(comment, comment_compressed)
         reserve m
+      end
+    end
+
+    # Google conditional comments
+    def process_google_conditional_comments (out)
+      out.gsub /(<!--google(?:on|off):.*?-->)/ do |m|
+          reserve m
       end
     end
 

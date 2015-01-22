@@ -66,6 +66,11 @@ describe HtmlPress do
     HtmlPress.press(text).should eql text
   end
 
+  it "should leave googleon/googleoff comments" do
+    text = "<!--googleoff:snippet-->Some text<!--googleon:snippet--><div></div>"
+    HtmlPress.press(text).should eql text
+  end
+
   it "should work with special utf-8 symbols" do
     HtmlPress.press("✪<p></p>  <p></p>").should eql "✪<p></p><p></p>"
   end
